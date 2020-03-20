@@ -47,6 +47,16 @@
         android:textAlignment="center"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/SongArtist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/SongArtist"
+        android:textAlignment="center"
+        android:textSize="12sp" />
+
     <ImageView
         android:id="@+id/RotatingImage"
         android:layout_width="295dp"
@@ -66,10 +76,38 @@
         android:textStyle="bold" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/PlayPosition"
         android:layout_width="344dp"
         android:layout_height="31dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp">
+
+        <TextView
+            android:id="@+id/ElapsedTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:text="@string/ETL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6" />
+
+        <TextView
+            android:id="@+id/RemainingTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/RTL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.841"
+            app:layout_constraintStart_toEndOf="@+id/ElapsedTimeLabel"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
