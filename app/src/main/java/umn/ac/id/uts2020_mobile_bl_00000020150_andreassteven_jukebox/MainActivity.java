@@ -2,12 +2,16 @@ package umn.ac.id.uts2020_mobile_bl_00000020150_andreassteven_jukebox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -17,7 +21,9 @@ public class MainActivity extends AppCompatActivity
     SeekBar PlayPosition;
     MediaPlayer MP;
     TextView ElapsedTimeLabel, RemainingTimeLabel;
+    ImageView RotatingImage;
     int TotalTIme;
+    Boolean Playled = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,9 +34,15 @@ public class MainActivity extends AppCompatActivity
         PlayPosition = findViewById(R.id.PlayPosition);
         BtnPlay = findViewById(R.id.BtnPlay);
         BtnPause = findViewById(R.id.BtnPause);
-
+        RotatingImage = findViewById(R.id.RotatingImage);
         ElapsedTimeLabel = findViewById(R.id.ElapsedTimeLabel);
         RemainingTimeLabel = findViewById(R.id.RemainingTimeLabel);
+
+        final ObjectAnimator imageViewObjectAnimator = ObjectAnimator.ofFloat(RotatingImage , "rotation", 0f, 360f);
+        imageViewObjectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
+        imageViewObjectAnimator.setRepeatMode(ObjectAnimator.RESTART);
+        imageViewObjectAnimator.setDuration(3000);
+        imageViewObjectAnimator.setInterpolator(new AccelerateInterpolator());
 
         MP = MediaPlayer.create(this, R.raw.music); //File musik. Sengaja difix buat liriknya
         MP.setLooping(false);
@@ -96,7 +108,17 @@ public class MainActivity extends AppCompatActivity
             {
                 if(!MP.isPlaying())
                 {
-                    MP.start();
+                    if(Playled == false)
+                    {
+                        MP.start();
+                        imageViewObjectAnimator.start();
+                        Playled = true;
+                    }
+                    else if(Playled == true)
+                    {
+                        MP.start();
+                        imageViewObjectAnimator.resume();
+                    }
                 }
             }
         });
@@ -109,7 +131,18 @@ public class MainActivity extends AppCompatActivity
                 if(MP.isPlaying())
                 {
                     MP.pause();
+                    imageViewObjectAnimator.pause();
                 }
+            }
+        });
+
+        MP.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+        {
+            @Override
+            public void onCompletion(MediaPlayer arg0)
+            {
+                imageViewObjectAnimator.end();
+                Playled = false;
             }
         });
     }
