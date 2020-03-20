@@ -2,10 +2,16 @@
     <string name="app_name">UTS2020_MOBILE-BL_00000020150_AndreasSteven_Jukebox</string>
     <string name="AppTitle">JUKEBOX APP</string>
     <string name="BtnAbout">About</string>
+    <string name="AM">About Me</string>
     <string name="SongTitle">Heal The World</string>
     <string name="SongArtist">Michael Jacson</string>
     <string name="RotatingImage">Rotating Image</string>
     <string name="SongLyricDefault">Song Lyric</string>
     <string name="ETL">0:11</string>
     <string name="RTL">-1:11</string>
+    <string name="N">Name   : Andreas Steven</string>
+    <string name="NM">NIM   : 00000020150</string>
+    <string name="KL">Kelas   : BL</string>
+    <string name="LB">Library   : -</string>
+    <string name="BK">Back</string>
 </resources>
