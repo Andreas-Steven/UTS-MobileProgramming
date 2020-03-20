@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UTS2020_MOBILE-BL_00000020150_AndreasSteven_Jukebox</string>
+    <string name="AppTitle">JUKEBOX APP</string>
+    <string name="BtnAbout">About</string>
+    <string name="SongTitle">Song Title</string>
+    <string name="RotatingImage">Rotating Image</string>
+    <string name="SongLyricDefault">Song Lyric</string>
+</resources>
