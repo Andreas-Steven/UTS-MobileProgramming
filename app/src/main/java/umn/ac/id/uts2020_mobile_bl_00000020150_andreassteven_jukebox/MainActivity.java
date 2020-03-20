@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         BtnPause = findViewById(R.id.BtnPause);
         RotatingImage = findViewById(R.id.RotatingImage);
         ElapsedTimeLabel = findViewById(R.id.ElapsedTimeLabel);
-        RemainingTimeLabel = findViewById(R.id.RemainingTimeLabel);\
+        RemainingTimeLabel = findViewById(R.id.RemainingTimeLabel);
         BtnAbout = findViewById(R.id.BtnAbout);
 
         final ObjectAnimator imageViewObjectAnimator = ObjectAnimator.ofFloat(RotatingImage , "rotation", 0f, 360f);
