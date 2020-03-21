@@ -61,25 +61,29 @@
         android:id="@+id/RotatingImage"
         android:layout_width="295dp"
         android:layout_height="167dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/RotatingImage"
         app:srcCompat="@drawable/records" />
 
-    <TextView
-        android:id="@+id/SongLyric"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="139dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/SongLyricDefault"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="200dp">
+        <!--https://stackoverflow.com/questions/6674578/multiline-textview-in-android-->
+        <TextView
+            android:id="@+id/TextLirik"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lirik"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+    </ScrollView>
 
     <SeekBar
         android:id="@+id/PlayPosition"
         android:layout_width="344dp"
         android:layout_height="31dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -111,8 +115,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="63dp">
 
         <Button
             android:id="@+id/BtnPlay"

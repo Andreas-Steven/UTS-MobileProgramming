@@ -3,7 +3,10 @@ package umn.ac.id.uts2020_mobile_bl_00000020150_andreassteven_jukebox;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity
 {
     Button BtnPlay, BtnPause, BtnAbout;
@@ -22,6 +28,7 @@ public class MainActivity extends AppCompatActivity
     MediaPlayer MP;
     TextView ElapsedTimeLabel, RemainingTimeLabel;
     ImageView RotatingImage;
+    TextView Lirik;
     int TotalTIme;
     Boolean Playled = false;
 
@@ -38,12 +45,15 @@ public class MainActivity extends AppCompatActivity
         ElapsedTimeLabel = findViewById(R.id.ElapsedTimeLabel);
         RemainingTimeLabel = findViewById(R.id.RemainingTimeLabel);
         BtnAbout = findViewById(R.id.BtnAbout);
+        Lirik = findViewById(R.id.TextLirik);
 
         final ObjectAnimator imageViewObjectAnimator = ObjectAnimator.ofFloat(RotatingImage , "rotation", 0f, 360f);
         imageViewObjectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
         imageViewObjectAnimator.setRepeatMode(ObjectAnimator.RESTART);
         imageViewObjectAnimator.setDuration(3000);
-        imageViewObjectAnimator.setInterpolator(new AccelerateInterpolator());
+
+        final ObjectAnimator textViewObjectAnimator = ObjectAnimator.ofFloat(Lirik, "translationY",0f, -4000f);
+        textViewObjectAnimator.setDuration(380000);
 
         MP = MediaPlayer.create(this, R.raw.music); //File musik. Sengaja difix buat liriknya
         MP.setLooping(false);
@@ -113,12 +123,14 @@ public class MainActivity extends AppCompatActivity
                     {
                         MP.start();
                         imageViewObjectAnimator.start();
+                        textViewObjectAnimator.start();
                         Playled = true;
                     }
                     else if(Playled == true)
                     {
                         MP.start();
                         imageViewObjectAnimator.resume();
+                        textViewObjectAnimator.resume();
                     }
                 }
             }
@@ -133,6 +145,7 @@ public class MainActivity extends AppCompatActivity
                 {
                     MP.pause();
                     imageViewObjectAnimator.pause();
+                    textViewObjectAnimator.pause();
                 }
             }
         });
@@ -143,7 +156,18 @@ public class MainActivity extends AppCompatActivity
             public void onCompletion(MediaPlayer arg0)
             {
                 imageViewObjectAnimator.end();
+                textViewObjectAnimator.end();
                 Playled = false;
+            }
+        });
+
+        BtnAbout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent =  new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
             }
         });
     }
