@@ -13,6 +13,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -50,10 +51,13 @@ public class MainActivity extends AppCompatActivity
         final ObjectAnimator imageViewObjectAnimator = ObjectAnimator.ofFloat(RotatingImage , "rotation", 0f, 360f);
         imageViewObjectAnimator.setRepeatCount(ObjectAnimator.INFINITE);
         imageViewObjectAnimator.setRepeatMode(ObjectAnimator.RESTART);
+        imageViewObjectAnimator.setInterpolator(new LinearInterpolator());
         imageViewObjectAnimator.setDuration(3000);
 
-        final ObjectAnimator textViewObjectAnimator = ObjectAnimator.ofFloat(Lirik, "translationY",0f, -4000f);
-        textViewObjectAnimator.setDuration(380000);
+        final ObjectAnimator textViewObjectAnimator = ObjectAnimator.ofFloat(Lirik, "translationY",0f, -10000f);
+        textViewObjectAnimator.setInterpolator(new LinearInterpolator());
+        textViewObjectAnimator.setStartDelay(72000);
+        textViewObjectAnimator.setDuration(300000);
 
         MP = MediaPlayer.create(this, R.raw.music); //File musik. Sengaja difix buat liriknya
         MP.setLooping(false);
@@ -170,6 +174,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        MP.stop();
     }
 
     private Handler handler = new Handler()
